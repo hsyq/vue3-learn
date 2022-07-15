@@ -12,7 +12,7 @@
     "lib": ["esnext", "dom"], // 支持的类库 esnext及dom
     "baseUrl": ".",  // 当前目录，即项目根目录作为基础目录
     "paths": { // 路径别名配置
-      "@my-vue/*": ["packages/*/src"] // 当引入 @vue/时，去 packages/*/src中找
+      "@my-vue/*": ["packages/*/src"] // 当引入 @my-vue/时，去 packages/*/src中找
     },
   }
 }
