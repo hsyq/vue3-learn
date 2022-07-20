@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script src="../dist/reactivity.global.js"></script>
+
+    <script>
+        // VueReactivity：在响应式模块的 package.json 中通过 buildOptions.name 起的名字
+        const { reactive, effect } = VueReactivity
+
+        const obj = { name: 'kw', age: 18, grade: { math: 60 } }
+
+        const state = reactive(obj)
+
+        effect(() => {
+            app.innerHTML = `${state.name}数学考了${state.grade.math}分`
+        })
+
+        setTimeout(() => {
+            state.grade.math = 80
+        }, 1000)
+    </script>
+</body>
+
+</html>

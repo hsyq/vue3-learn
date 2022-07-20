@@ -1,4 +1,5 @@
 import { isObject } from '@my-vue/shared'
+import { track, trigger } from './effect'
 
 // 缓存响应式对象
 const reactiveMap = new WeakMap
@@ -6,7 +7,6 @@ const reactiveMap = new WeakMap
 const enum ReactiveFlags {
   IS_REACTIVE = '__v_isReactive',
 } 
-
 
 export function reactive (target) {
    
@@ -21,9 +21,9 @@ export function reactive (target) {
   }
 
   // 判断 target 是否被代理过。如果被代理过，则直接返回代理对象
-  const existing = reactiveMap.get(target)
-  if(existing) {
-    return existing
+  const existingProxy  = reactiveMap.get(target)
+  if(existingProxy ) {
+    return existingProxy 
   }
   
   const handler = {
@@ -35,6 +35,8 @@ export function reactive (target) {
       }
       console.log(`${key}属性被访问，依赖收集`)
 
+      // 依赖收集
+      track(target, key)
       const res = Reflect.get(target, key)
       if(isObject(res)) {
         return reactive(res)
@@ -48,8 +50,9 @@ export function reactive (target) {
      
       // 当属性的新值和旧值不同时，再进行设置
       if(target[key] !== value) {
-         const result = Reflect.set(target, key, value, receiver);
-         return result
+        const result = Reflect.set(target, key, value, receiver);
+        trigger(target, key);
+        return result
       }
     }
   }
