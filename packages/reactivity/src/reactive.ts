@@ -48,7 +48,7 @@ export function reactive (target) {
      
       // 当属性的新值和旧值不同时，再进行设置
       if(target[key] !== value) {
-         const result = Reflect.set(target, key, value, receiver);;
+         const result = Reflect.set(target, key, value, receiver);
          return result
       }
     }
