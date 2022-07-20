@@ -17,12 +17,13 @@
         // VueReactivity：在响应式模块的 package.json 中通过 buildOptions.name 起的名字
         const { reactive, createApp, defineComponent } = VueReactivity
 
-        const obj = { name: 'kw', age: 18 }
+        const obj = { name: 'kw', age: 18, grade: { math: 88 } }
 
         const state = reactive(obj)
 
         // 访问响应式对象的属性
         console.log(state.name)
+        console.log(state.grade.math)
         // 修改响应式对象的属性
         state.age = 20
     </script>

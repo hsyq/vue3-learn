@@ -34,7 +34,12 @@ export function reactive (target) {
         return true
       }
       console.log(`${key}属性被访问，依赖收集`)
-      return Reflect.get(target, key)
+
+      const res = Reflect.get(target, key)
+      if(isObject(res)) {
+        return reactive(res)
+      }
+      return res
     },
     
     // 监听设置属性操作
