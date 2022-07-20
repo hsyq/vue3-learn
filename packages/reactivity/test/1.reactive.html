@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script src="../dist/reactivity.global.js"></script>
+
+    <script>
+        // VueReactivity：在响应式模块的 package.json 中通过 buildOptions.name 起的名字
+        const { reactive, createApp, defineComponent } = VueReactivity
+
+        const obj = { name: 'kw', age: 18 }
+
+        const state = reactive(obj)
+
+        // 访问响应式对象的属性
+        console.log(state.name)
+        // 修改响应式对象的属性
+        state.age = 20
+    </script>
+</body>
+
+</html>
