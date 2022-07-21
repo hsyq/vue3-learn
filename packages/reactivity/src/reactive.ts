@@ -35,7 +35,7 @@ export function reactive (target) {
       }
       console.log(`${key}属性被访问，依赖收集`)
 
-      // 依赖收集
+      // 依赖收集，让 target, key 和 当前的 _effect 关联起来
       track(target, key)
       const res = Reflect.get(target, key)
       if(isObject(res)) {
